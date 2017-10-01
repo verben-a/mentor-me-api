@@ -11,17 +11,18 @@ class User(Base):
 	id = Column(Integer, primary_key=True)
 	email = Column(String(128), unique=True)
 	password = Column(String(128))
-	roles = relationship("Role", backref = "users")
+	roles = Column(Boolean)
+	# roles = relationship("Role", backref = "users")
 
 	profile = relationship("Profile", uselist=False, backref="profiles")
 
-class Role(Base):
-	"""docstring for role"""
-	__tablename__= "roles"
-	id = Column(Integer, primary_key=True)
-	roletype = Column(String(100), default = "mentee")
-	""".... MANY """
-	user_id = Column(Integer, ForeignKey('users.id'), nullable = False)
+# class Role(Base):
+# 	"""docstring for role"""
+# 	__tablename__= "roles"
+# 	id = Column(Integer, primary_key=True)
+# 	roletype = Column(String(100), default = "mentee")
+# 	""".... MANY """
+# 	user_id = Column(Integer, ForeignKey('users.id'), nullable = False)
 
 class Profile(Base):
 	"""docstring for Profile
@@ -36,9 +37,10 @@ class Profile(Base):
 	experience = relationship("Experience", backref="experiences")
 	education = relationship("Education", backref="educations") 
 	location = Column(String(100))
-	languages = Column(String(100))
+	languages = relationship("Language", backref="languages")
 	skills = Column(String(300))
 	photo = Column(String(300))
+	service = relationship("Service", backref="services")
 	linkedin = Column(String(300))
 	facebook = Column(String(300))
 
@@ -81,26 +83,21 @@ class Skill(Base):
 	__tablename__="skills"
 
 	id = Column(Integer, primary_key=True)
-	skill_name = Column(String(300))
+	skill_name = Column(String(70))
 
 	profile_id = Column(Integer, ForeignKey("skills.id"), nullable=False)
+
+class Service(Base):
+	"""docstring for Service"""
+	__tablename__="services"
+
+	id = Column(Integer, primary_key=True)
+	service_name = Column(String(50))
+	cost = Column(Integer)
+
+	profile_id = Column(Integer, ForeignKey("service.id"), nullable=False)
+
 
 	
 		
 
-
-
-		
-
-
-
-
-
-
-
-
-
-
-
-
-		
