@@ -1,9 +1,9 @@
 import os
 from flask_script import Manager
-from flask_migrate import Migrate, MigrateCommand
-from directory.database import Base
+# from flask_migrate import Migrate, MigrateCommand
+# from directory.database import Base
 
-from directory import app
+from mentor import app
 
 manager = Manager(app)
 
@@ -17,8 +17,8 @@ class DB(object):
     def __init__(self, metadata):
         self.metadata = metadata
 
-migrate = Migrate(app, DB(Base.metadata))
-manager.add_command('db', MigrateCommand)
+# migrate = Migrate(app, DB(Base.metadata))
+# manager.add_command('db', MigrateCommand)
 
 if __name__ == "__main__":
     manager.run()

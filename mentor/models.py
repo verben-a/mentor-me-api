@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Text, ForeignKey, Boolean, Float
+from sqlalchemy import Column, Integer, String, Text, ForeignKey
 from sqlalchemy.orm import relationship
 from .database import Base
 from flask_login import UserMixin
@@ -11,9 +11,18 @@ class User(Base):
 	id = Column(Integer, primary_key=True)
 	email = Column(String(128), unique=True)
 	password = Column(String(128))
-	is_mentor = Column(Boolean, default=False)
+	roles = Column(Boolean)
+	# roles = relationship("Role", backref = "users")
 
 	profile = relationship("Profile", uselist=False, backref="profiles")
+
+# class Role(Base):
+# 	"""docstring for role"""
+# 	__tablename__= "roles"
+# 	id = Column(Integer, primary_key=True)
+# 	roletype = Column(String(100), default = "mentee")
+# 	""".... MANY """
+# 	user_id = Column(Integer, ForeignKey('users.id'), nullable = False)
 
 class Profile(Base):
 	"""docstring for Profile
@@ -23,7 +32,7 @@ class Profile(Base):
 
 	id = Column(Integer, primary_key=True)
 	name_surname = Column(String(100))
-	summary = Column(String(300))
+	summary = Column(String(128))
 	position_at_company = Column(String(300)) 
 	experience = relationship("Experience", backref="experiences")
 	education = relationship("Education", backref="educations") 
@@ -84,7 +93,7 @@ class Service(Base):
 
 	id = Column(Integer, primary_key=True)
 	service_name = Column(String(50))
-	cost = Column(Float)
+	cost = Column(Integer)
 
 	profile_id = Column(Integer, ForeignKey("service.id"), nullable=False)
 
