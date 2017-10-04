@@ -21,19 +21,19 @@ def home():
 
 @app.route("/tou_privacy")
 def tou_privacy():
-	return render_template("tou_privacy.html")
+    return render_template("tou_privacy.html")
 
 @app.route("/contacts")
 def contacts():
-	return render_template("contacts.html")
+    return render_template("contacts.html")
 
 @app.route("/team")
 def team():
-	return render_template("team.html")
+    return render_template("team.html")
 
 @app.route("/about")
 def about():
-	return render_template("about.html")
+    return render_template("about.html")
 
 
 @app.route("/login", methods=["POST"])
@@ -77,7 +77,7 @@ def signup_post():
     user = User(email=email, password=password)
 
     profile = Profile(name_surname=name_surname,
-    				  position_at_company=position_at_company,
+                      position_at_company=position_at_company,
                       experience = experience,
                       location=location,
                       education = education,
